@@ -1,14 +1,11 @@
 # lazy_load_indexed_stack
 
-A new Flutter package project.
+A package that extends IndexedStack to allow for lazy loading.
 
-## Getting Started
+## Motivation
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+If you use the IndexedStack with bottom navigation, all the widgets specified in the children of the IndexedStack will be built.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+If the widget requires API requests or database access, or has a complex UI, the IndexedStack build time will be significant.
+
+Therefore, I created an extended IndexedStack that builds the required widget only when it is needed, and returns the pre-built widget when it is needed again.
