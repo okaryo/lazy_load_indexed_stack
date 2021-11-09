@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Beta Release
+
 ## 0.0.2
 
 * Add Widget parameter
