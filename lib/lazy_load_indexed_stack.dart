@@ -3,22 +3,24 @@ library lazy_load_indexed_stack;
 import 'package:flutter/material.dart';
 
 class LazyLoadIndexedStack extends StatefulWidget {
+  late final Widget unloadWidget;
   final AlignmentGeometry alignment;
   final StackFit sizing;
   final TextDirection? textDirection;
   final int index;
   final List<Widget> children;
-  final Widget unloadWidget;
 
-  const LazyLoadIndexedStack({
+  LazyLoadIndexedStack({
     Key? key,
+    Widget? unloadWidget,
     this.alignment = AlignmentDirectional.topStart,
     this.sizing = StackFit.loose,
     this.textDirection,
     required this.index,
     required this.children,
-    required this.unloadWidget,
-  }) : super(key: key);
+  }) : super(key: key) {
+    if (unloadWidget == null) unloadWidget = Container();
+  }
 
   @override
   _LazyLoadIndexedStackState createState() => _LazyLoadIndexedStackState();
