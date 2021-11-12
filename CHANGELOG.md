@@ -1,3 +1,8 @@
+## 0.1.1
+
+* Add example code
+* Modify property
+
 ## 0.1.0
 
 * Beta Release
