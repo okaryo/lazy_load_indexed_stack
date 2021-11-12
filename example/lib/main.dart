@@ -39,9 +39,18 @@ class _MainPageState extends State<MainPage> {
           },
           currentIndex: _index,
           items: [
-            const BottomNavigationBarItem(icon: Icon(Icons.email), label: 'MAIL'),
-            const BottomNavigationBarItem(icon: Icon(Icons.today), label: 'CALENDAR'),
-            const BottomNavigationBarItem(icon: Icon(Icons.group), label: 'USER'),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.email),
+              label: 'MAIL',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.today),
+              label: 'CALENDAR',
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.group),
+              label: 'USER',
+            ),
           ],
         ),
       ),
