@@ -1,3 +1,8 @@
+## 0.1.2
+
+* Add API description
+* Modify unloadWidget initializer
+
 ## 0.1.1
 
 * Add example code
