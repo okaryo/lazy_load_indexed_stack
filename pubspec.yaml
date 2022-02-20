@@ -1,6 +1,6 @@
 name: lazy_load_indexed_stack
 description: A package that extends IndexedStack to allow for lazy loading.
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/okaryo/lazy_load_indexed_stack
 repository: https://github.com/okaryo/lazy_load_indexed_stack
 
