@@ -43,33 +43,27 @@ class LazyLoadIndexedStack extends StatefulWidget {
 }
 
 class _LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
-  late final List<bool> _alreadyLoaded;
-
   late List<Widget> _children;
-
-  final stackKey = GlobalKey();
+  final _stackKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
 
-    _alreadyLoaded = List.filled(widget.children.length, false);
-    _alreadyLoaded[widget.index] = true;
-
-    _children = _loadedChildren();
+    _children = _initialChildren();
   }
 
   @override
   void didUpdateWidget(final LazyLoadIndexedStack oldWidget) {
-    _alreadyLoaded[widget.index] = true;
-    _children[widget.index] = widget.children[widget.index];
     super.didUpdateWidget(oldWidget);
+
+    _children[widget.index] = widget.children[widget.index];
   }
 
   @override
   Widget build(final BuildContext context) {
     return IndexedStack(
-      key: stackKey,
+      key: _stackKey,
       index: widget.index,
       children: _children,
       alignment: widget.alignment,
@@ -78,11 +72,11 @@ class _LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
     );
   }
 
-  List<Widget> _loadedChildren() {
+  List<Widget> _initialChildren() {
     return widget.children.asMap().entries.map((entry) {
       final index = entry.key;
       final childWidget = entry.value;
-      return _alreadyLoaded[index] ? childWidget : widget.unloadWidget;
+      return index == widget.index ? childWidget : widget.unloadWidget;
     }).toList();
   }
 }
