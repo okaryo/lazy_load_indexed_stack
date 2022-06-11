@@ -35,7 +35,7 @@ class LazyLoadIndexedStack extends StatefulWidget {
     required this.index,
     required this.children,
   }) : super(key: key) {
-    this.unloadWidget = unloadWidget == null ? Container() : unloadWidget;
+    this.unloadWidget = unloadWidget ?? Container();
   }
 
   @override

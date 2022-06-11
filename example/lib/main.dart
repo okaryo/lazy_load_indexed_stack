@@ -38,16 +38,16 @@ class _MainPageState extends State<MainPage> {
             setState(() => _index = index);
           },
           currentIndex: _index,
-          items: [
-            const BottomNavigationBarItem(
+          items: const [
+            BottomNavigationBarItem(
               icon: Icon(Icons.email),
               label: 'MAIL',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.today),
               label: 'CALENDAR',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.group),
               label: 'USER',
             ),
