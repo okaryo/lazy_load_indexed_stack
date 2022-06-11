@@ -1,3 +1,5 @@
+[![Test and Lint](https://github.com/okaryo/lazy_load_indexed_stack/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/okaryo/lazy_load_indexed_stack/actions/workflows/test-and-lint.yml)
+
 # lazy_load_indexed_stack
 
 A package that extends IndexedStack to allow for lazy loading.
