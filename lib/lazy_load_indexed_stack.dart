@@ -1,6 +1,6 @@
 library lazy_load_indexed_stack;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// An extended IndexedStack that builds the required widget only when it is needed, and returns the pre-built widget when it is needed again.
 class LazyLoadIndexedStack extends StatefulWidget {
@@ -43,39 +43,40 @@ class LazyLoadIndexedStack extends StatefulWidget {
 }
 
 class _LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
-  late final List<bool> _alreadyLoaded;
+  late List<Widget> _children;
+  final _stackKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
 
-    _alreadyLoaded = List.filled(widget.children.length, false);
-    _alreadyLoaded[widget.index] = true;
+    _children = _initialChildren();
   }
 
   @override
   void didUpdateWidget(final LazyLoadIndexedStack oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    _alreadyLoaded[widget.index] = true;
+    _children[widget.index] = widget.children[widget.index];
   }
 
   @override
   Widget build(final BuildContext context) {
     return IndexedStack(
+      key: _stackKey,
       index: widget.index,
-      children: _loadedChildren(),
+      children: _children,
       alignment: widget.alignment,
       textDirection: widget.textDirection,
       sizing: widget.sizing,
     );
   }
 
-  List<Widget> _loadedChildren() {
+  List<Widget> _initialChildren() {
     return widget.children.asMap().entries.map((entry) {
       final index = entry.key;
       final childWidget = entry.value;
-      return _alreadyLoaded[index] ? childWidget : widget.unloadWidget;
+      return index == widget.index ? childWidget : widget.unloadWidget;
     }).toList();
   }
 }
