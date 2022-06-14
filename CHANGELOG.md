@@ -1,3 +1,6 @@
+## 0.1.4
+* FIX eager rebuilds
+
 ## 0.1.3
 * Update README
 
