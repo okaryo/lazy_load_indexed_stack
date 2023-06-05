@@ -3,6 +3,9 @@ name: Test and Lint
 on:
   push:
 
+env:
+  FLUTTER_VERSION: 3.10.0
+
 jobs:
   test:
     name: Run test
@@ -12,7 +15,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.5'
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
       - name: Run pub get
         run: flutter pub get
@@ -27,7 +30,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '2.10.5'
+        flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: 'stable'
     - name: Run pub get
       run: flutter pub get
