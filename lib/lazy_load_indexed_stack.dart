@@ -39,10 +39,10 @@ class LazyLoadIndexedStack extends StatefulWidget {
   }
 
   @override
-  _LazyLoadIndexedStackState createState() => _LazyLoadIndexedStackState();
+  LazyLoadIndexedStackState createState() => LazyLoadIndexedStackState();
 }
 
-class _LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
+class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
   late List<Widget> _children;
   final _stackKey = GlobalKey();
 
@@ -65,10 +65,10 @@ class _LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
     return IndexedStack(
       key: _stackKey,
       index: widget.index,
-      children: _children,
       alignment: widget.alignment,
       textDirection: widget.textDirection,
       sizing: widget.sizing,
+      children: _children,
     );
   }
 
