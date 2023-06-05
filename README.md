@@ -1,4 +1,5 @@
 [![Test and Lint](https://github.com/okaryo/lazy_load_indexed_stack/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/okaryo/lazy_load_indexed_stack/actions/workflows/test-and-lint.yml)
+[![Pub](https://img.shields.io/pub/v/lazy_load_indexed_stack)](https://pub.dev/packages/lazy_load_indexed_stack)
 
 # lazy_load_indexed_stack
 

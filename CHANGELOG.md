@@ -1,3 +1,6 @@
+## 1.0.0
+* Update required sdk version to `^3.0.0`
+
 ## 0.1.4
 * FIX eager rebuilds
 
