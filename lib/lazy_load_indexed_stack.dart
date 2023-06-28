@@ -57,6 +57,10 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
   void didUpdateWidget(final LazyLoadIndexedStack oldWidget) {
     super.didUpdateWidget(oldWidget);
 
+    if (widget.children.length != oldWidget.children.length) {
+      _children = _initialChildren();
+    }
+
     _children[widget.index] = widget.children[widget.index];
   }
 
