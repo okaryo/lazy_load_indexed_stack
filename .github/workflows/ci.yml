@@ -1,21 +1,17 @@
-name: Test and Lint
+name: CI
 
 on:
   push:
-
-env:
-  FLUTTER_VERSION: 3.10.0
 
 jobs:
   test:
     name: Run test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
       - name: Run pub get
         run: flutter pub get
@@ -26,11 +22,10 @@ jobs:
     name: Run lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: ${{ env.FLUTTER_VERSION }}
         channel: 'stable'
     - name: Run pub get
       run: flutter pub get
