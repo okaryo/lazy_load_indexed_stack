@@ -27,14 +27,14 @@ class LazyLoadIndexedStack extends StatefulWidget {
 
   /// Creates LazyLoadIndexedStack that wraps IndexedStack.
   LazyLoadIndexedStack({
-    Key? key,
+    super.key,
     Widget? unloadWidget,
     this.alignment = AlignmentDirectional.topStart,
     this.sizing = StackFit.loose,
     this.textDirection,
     required this.index,
     required this.children,
-  }) : super(key: key) {
+  }) {
     this.unloadWidget = unloadWidget ?? Container();
   }
 
