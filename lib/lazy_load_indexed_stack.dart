@@ -7,6 +7,9 @@ class LazyLoadIndexedStack extends StatefulWidget {
   /// Widget to be built when not loaded. Default widget is [Container].
   late final Widget unloadWidget;
 
+  /// The indexes of children that should be preloaded.
+  final List<int> preloadIndexes;
+
   /// Same as alignment attribute of original IndexedStack.
   final AlignmentGeometry alignment;
 
@@ -29,6 +32,7 @@ class LazyLoadIndexedStack extends StatefulWidget {
   LazyLoadIndexedStack({
     super.key,
     Widget? unloadWidget,
+    this.preloadIndexes = const [],
     this.alignment = AlignmentDirectional.topStart,
     this.sizing = StackFit.loose,
     this.textDirection,
@@ -80,7 +84,12 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
     return widget.children.asMap().entries.map((entry) {
       final index = entry.key;
       final childWidget = entry.value;
-      return index == widget.index ? childWidget : widget.unloadWidget;
+
+      if (index == widget.index || widget.preloadIndexes.contains(index)) {
+        return childWidget;
+      } else {
+        return widget.unloadWidget;
+      }
     }).toList();
   }
 }
