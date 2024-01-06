@@ -3,10 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lazy_load_indexed_stack_example/main.dart';
 
 void main() {
-  testWidgets('lazy load page2 after bottom navigation item tapped',
-      (WidgetTester tester) async {
+  testWidgets('lazy load page2 after bottom navigation item tapped', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MainApp());
+    await tester.pumpWidget(const MainApp());
 
     // Verify that only page1 is loaded.
     expect(find.text('page1'), findsOneWidget);
