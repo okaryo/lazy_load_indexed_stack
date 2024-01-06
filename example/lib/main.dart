@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
   @override
   Widget build(final BuildContext context) {
-    return MaterialApp(home: MainPage());
+    return const MaterialApp(home: MainPage());
   }
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _MainPageState();
 }
@@ -27,7 +31,8 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(title: const Text('Example')),
         body: LazyLoadIndexedStack(
           index: _index,
-          children: [
+          preloadIndexes: const [2],
+          children: const [
             Page1(),
             Page2(),
             Page3(),
@@ -59,6 +64,8 @@ class _MainPageState extends State<MainPage> {
 }
 
 class Page1 extends StatelessWidget {
+  const Page1({super.key});
+
   @override
   Widget build(final BuildContext context) {
     return const Center(
@@ -68,6 +75,8 @@ class Page1 extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
+  const Page2({super.key});
+
   @override
   Widget build(final BuildContext context) {
     return const Center(
@@ -77,6 +86,8 @@ class Page2 extends StatelessWidget {
 }
 
 class Page3 extends StatelessWidget {
+  const Page3({super.key});
+
   @override
   Widget build(final BuildContext context) {
     return const Center(
