@@ -1,3 +1,6 @@
+## 1.2.0
+* Add `autoDisposeIndexes` to dispose unused IndexedStack children and rebuild them when needed in [#7](https://github.com/okaryo/lazy_load_indexed_stack/pull/7)
+
 ## 1.1.0
 * Add `preloadIndexes` Property for Advanced Element Preloading in [#6](https://github.com/okaryo/lazy_load_indexed_stack/pull/6)
 
