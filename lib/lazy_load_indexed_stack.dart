@@ -8,8 +8,8 @@ class LazyLoadIndexedStack extends StatefulWidget {
   /// The indexes of children that should be preloaded.
   final List<int> preloadIndexes;
 
-  /// The indexes of children that should be forcibly reloaded.
-  final List<int> forceReloadIndexes;
+  /// The indexes of children that should be automatically disposed and rebuilt when accessed again.
+  final List<int> autoDisposeIndexes;
 
   /// Same as alignment attribute of original IndexedStack.
   final AlignmentGeometry alignment;
@@ -34,7 +34,7 @@ class LazyLoadIndexedStack extends StatefulWidget {
     super.key,
     Widget? unloadWidget,
     this.preloadIndexes = const [],
-    this.forceReloadIndexes = const [],
+    this.autoDisposeIndexes = const [],
     this.alignment = AlignmentDirectional.topStart,
     this.sizing = StackFit.loose,
     this.textDirection,
@@ -67,7 +67,7 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
       _children = _initialChildren();
     }
 
-    _children = _updateChildrenForReload();
+    _children = _updateChildrenForAutoDispose();
 
     _children[widget.index] = widget.children[widget.index];
   }
@@ -97,12 +97,12 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
     }).toList();
   }
 
-  List<Widget> _updateChildrenForReload() {
+  List<Widget> _updateChildrenForAutoDispose() {
     return widget.children.asMap().entries.map((entry) {
       final index = entry.key;
       final childWidget = entry.value;
 
-      if (index != widget.index && widget.forceReloadIndexes.contains(index)) {
+      if (index != widget.index && widget.autoDisposeIndexes.contains(index)) {
         return widget.unloadWidget;
       } else {
         return childWidget;
