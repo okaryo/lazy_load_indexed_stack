@@ -7,19 +7,19 @@ A package that extends IndexedStack to allow for lazy loading and provides enhan
 
 ## Motivation
 
-If you use the IndexedStack with bottom navigation, all the widgets specified in the children of the IndexedStack will be built.
+If you use the IndexedStack with bottom navigation, all the widgets specified in the children of the IndexedStack will be built.  
 
-Moreover, if the widget requires API requests or database access, or has a complex UI, the IndexedStack build time will be significant.
+Moreover, if the widget requires API requests or database access, or has a complex UI, the IndexedStack build time will be significant.  
 
-Therefore, we created an extended IndexedStack that builds the required widget only when it is needed, and returns the pre-built widget when it is needed again. With the newly added features, you can now also force specific child widgets to reload or manage widget updates dynamically.
+Therefore, we created an extended IndexedStack that builds the required widget only when it is needed and returns the pre-built widget when it is needed again.
 
 ## Features
 * **Lazy Loading**: The main feature of `LazyLoadIndexedStack` is to build children widgets only when they are needed, reducing initial load time.
 * **Preloading**: With the `preloadIndexes` parameter, you can specify indexes of children that should be built in advance, even if they are not currently visible. This is useful for preloading widgets that are likely to be needed soon.
-* **Forced Reloading**: Using the `forceReloadIndexes` parameter, you can specify which child widgets should be forcibly rebuilt when needed. This is helpful for dynamic data loading or resetting specific widgets.
+* **Auto Disposal**: The `autoDisposeIndexes` parameter allows specific children to be automatically disposed of when they are no longer visible. When these children are accessed again, they will be rebuilt from scratch. This is useful for cases where widgets hold significant state or require resetting when revisited.
 
 ## Usage
-You can use `LazyLoadIndexedStack` in the same way as `IndexedStack`, with additional options for preloading and forced reloading.
+You can use `LazyLoadIndexedStack` in the same way as `IndexedStack`, with additional options for preloading and auto dispose.
 
 ### Basic Example
 ```dart
@@ -38,11 +38,11 @@ class _MainPageState extends State<MainPage> {
         body: LazyLoadIndexedStack(
           index: _index,
           preloadIndexes: const [3],
-          forceReloadIndexes: const [1, 2], // Force reload for index 1 and 2
+          autoDisposeIndexes: const [1, 2],
           children: [
             Page1(),
-            Page2(), // index 1 will be reloaded as specified
-            Page3(), // index 2 will also be reloaded
+            Page2(), // index 1 will be auto dispose
+            Page3(), // index 2 will also auto dispose
             Page4(), // index 3 is preloaded
           ],
         ),
