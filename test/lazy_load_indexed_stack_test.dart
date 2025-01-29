@@ -19,11 +19,36 @@ void main() {
           ],
         );
 
+        // initial state index = 0
         await tester.pumpWidget(MaterialApp(home: lazyLoadIndexedStack));
 
         expect(find.text('page1', skipOffstage: false), findsOneWidget);
         expect(find.text('page2', skipOffstage: false), findsNothing);
         expect(find.text('page3', skipOffstage: false), findsNothing);
+        expect(find.text('page4', skipOffstage: false), findsNothing);
+        expect(find.text('page5', skipOffstage: false), findsNothing);
+
+        // switch to index = 2
+        await tester.pumpWidget(
+          MaterialApp(
+            home: LazyLoadIndexedStack(
+              key: key,
+              index: 2,
+              children: [
+                _buildWidget(1),
+                _buildWidget(2),
+                _buildWidget(3),
+                _buildWidget(4),
+                _buildWidget(5),
+              ],
+            ),
+          ),
+        );
+        await tester.pump();
+
+        expect(find.text('page1', skipOffstage: false), findsOneWidget);
+        expect(find.text('page2', skipOffstage: false), findsNothing);
+        expect(find.text('page3', skipOffstage: false), findsOneWidget);
         expect(find.text('page4', skipOffstage: false), findsNothing);
         expect(find.text('page5', skipOffstage: false), findsNothing);
       });
