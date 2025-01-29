@@ -1,3 +1,6 @@
+## 1.2.1
+* Fix issue where non-preloaded children were loaded when index changed in [#12](https://github.com/okaryo/lazy_load_indexed_stack/pull/12)
+
 ## 1.2.0
 * Add `autoDisposeIndexes` to dispose unused IndexedStack children and rebuild them when needed in [#7](https://github.com/okaryo/lazy_load_indexed_stack/pull/7)
 
