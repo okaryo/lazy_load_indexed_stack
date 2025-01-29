@@ -57,6 +57,12 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
     super.initState();
 
     _children = _initialChildren();
+
+    final conflictingIndexes = widget.preloadIndexes.toSet().intersection(widget.autoDisposeIndexes.toSet());
+    if (conflictingIndexes.isNotEmpty) {
+      debugPrint('[LazyLoadIndexedStack] Warning: The same index is in both preloadIndexes and autoDisposeIndexes. '
+          'It will be preloaded initially but disposed when not visible. Conflicting indexes: $conflictingIndexes');
+    }
   }
 
   @override
@@ -67,7 +73,7 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
       _children = _initialChildren();
     }
 
-    _children = _updateChildrenForAutoDispose();
+    _children = _replaceAutoDisposedUnusedChildrenWithUnloadWidget();
 
     _children[widget.index] = widget.children[widget.index];
   }
@@ -91,22 +97,19 @@ class LazyLoadIndexedStackState extends State<LazyLoadIndexedStack> {
 
       if (index == widget.index || widget.preloadIndexes.contains(index)) {
         return childWidget;
-      } else {
-        return widget.unloadWidget;
       }
+
+      return widget.unloadWidget;
     }).toList();
   }
 
-  List<Widget> _updateChildrenForAutoDispose() {
-    return widget.children.asMap().entries.map((entry) {
-      final index = entry.key;
-      final childWidget = entry.value;
-
+  List<Widget> _replaceAutoDisposedUnusedChildrenWithUnloadWidget() {
+    return List.generate(_children.length, (index) {
       if (index != widget.index && widget.autoDisposeIndexes.contains(index)) {
         return widget.unloadWidget;
-      } else {
-        return childWidget;
       }
-    }).toList();
+
+      return _children[index];
+    });
   }
 }

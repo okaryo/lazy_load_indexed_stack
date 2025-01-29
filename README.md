@@ -7,9 +7,9 @@ A package that extends IndexedStack to allow for lazy loading and provides enhan
 
 ## Motivation
 
-If you use the IndexedStack with bottom navigation, all the widgets specified in the children of the IndexedStack will be built.  
+If you use the IndexedStack with bottom navigation, all the widgets specified in the children of the IndexedStack will be built.
 
-Moreover, if the widget requires API requests or database access, or has a complex UI, the IndexedStack build time will be significant.  
+Moreover, if the widget requires API requests or database access, or has a complex UI, the IndexedStack build time will be significant.
 
 Therefore, we created an extended IndexedStack that builds the required widget only when it is needed and returns the pre-built widget when it is needed again.
 
@@ -19,7 +19,7 @@ Therefore, we created an extended IndexedStack that builds the required widget o
 * **Auto Disposal**: The `autoDisposeIndexes` parameter allows specific children to be automatically disposed of when they are no longer visible. When these children are accessed again, they will be rebuilt from scratch. This is useful for cases where widgets hold significant state or require resetting when revisited.
 
 ## Usage
-You can use `LazyLoadIndexedStack` in the same way as `IndexedStack`, with additional options for preloading and auto dispose.
+You can use `LazyLoadIndexedStack` in the same way as `IndexedStack`, with additional options for preloading and auto dispose. If an index is included in both `preloadIndexes` and `autoDisposeIndexes`, it will be preloaded initially but disposed when it becomes invisible and rebuilt when accessed again.
 
 ### Basic Example
 ```dart
@@ -37,13 +37,13 @@ class _MainPageState extends State<MainPage> {
       home: Scaffold(
         body: LazyLoadIndexedStack(
           index: _index,
-          preloadIndexes: const [3],
-          autoDisposeIndexes: const [1, 2],
+          preloadIndexes: [1, 2],
+          autoDisposeIndexes: [2, 3],
           children: [
-            Page1(),
-            Page2(), // index 1 will be auto dispose
-            Page3(), // index 2 will also auto dispose
-            Page4(), // index 3 is preloaded
+            Page1(), // Load by initial index
+            Page2(), // Preloaded initially
+            Page3(), // Preloaded initially but disposed when other index is selected
+            Page4(), // Not preloaded and disposed when other index is selected
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
